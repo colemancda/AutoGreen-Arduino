@@ -38,18 +38,19 @@
 #endif
 
 // Include application, user and local libraries
-
+#include "Actuator.h"
 
 // Define variables and constants
 //
 // Brief	Name of the LED
 // Details	Each board has a LED but connected to a different pin
 //
-int myLED;
 
-int fanRelayPin = 12;
+Actuator led;
 
-int valveRelayPin = 11;
+Actuator fanRelay;
+
+Actuator valveRelay;
 
 //
 // Brief	Setup
@@ -57,24 +58,11 @@ int valveRelayPin = 11;
 //
 // Add setup code 
 void setup() {
-  // myLED pin number
-#if defined(ENERGIA) // All LaunchPads supported by Energia
-    myLED = RED_LED;
-#elif defined(DIGISPARK) // Digispark specific
-    myLED = 1; // assuming model A
-#elif defined(MAPLE_IDE) // Maple specific
-    myLED = BOARD_LED_PIN;
-#elif defined(WIRING) // Wiring specific
-    myLED = 15;
-#else // Arduino, chipKIT, Teensy specific
-    myLED = 13;
-#endif
-
-    pinMode(myLED, OUTPUT);
     
-    pinMode(fanRelayPin, OUTPUT);
+    led.setPin(13);
+    fanRelay.setPin(12);
+    valveRelay.setPin(11);
     
-    pinMode(fanRelayPin, OUTPUT);
 }
 
 //
@@ -83,11 +71,15 @@ void setup() {
 //
 // Add loop code 
 void loop() {
-    digitalWrite(myLED, HIGH);
-    digitalWrite(fanRelayPin, HIGH);
+    
+    led.setState(true);
+    fanRelay.setState(true);
+    
     delay(10000);
-    digitalWrite(myLED, LOW);
-    digitalWrite(fanRelayPin, LOW);
+    
+    led.setState(false);
+    fanRelay.setState(false);
+    
     delay(500);    
 }
 

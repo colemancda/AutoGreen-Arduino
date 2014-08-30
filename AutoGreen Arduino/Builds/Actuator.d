@@ -1,4 +1,4 @@
-Builds/main.o: main.cpp \
+Builds/Actuator.o: Actuator.cpp Actuator.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/Arduino.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/binary.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/WCharacter.h \
@@ -8,5 +8,4 @@ Builds/main.o: main.cpp \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/Print.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/Printable.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/new.h \
-  /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/variants/standard/pins_arduino.h \
-  AutoGreen_Arduino.ino Actuator.h
+  /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/variants/standard/pins_arduino.h
