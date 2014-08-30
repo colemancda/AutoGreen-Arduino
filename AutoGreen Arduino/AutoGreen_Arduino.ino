@@ -47,9 +47,7 @@
 //
 
 Actuator led;
-
 Actuator fanRelay;
-
 Actuator valveRelay;
 
 //
@@ -58,6 +56,8 @@ Actuator valveRelay;
 //
 // Add setup code 
 void setup() {
+    
+    // Setup Actuators
     
     led.setPin(13);
     fanRelay.setPin(12);
@@ -72,13 +72,13 @@ void setup() {
 // Add loop code 
 void loop() {
     
-    led.setState(true);
-    fanRelay.setState(true);
+    led.setState(false);
+    fanRelay.setState(false);
     
     delay(10000);
     
-    led.setState(false);
-    fanRelay.setState(false);
+    led.setState(true);
+    fanRelay.setState(true);
     
     delay(500);    
 }
