@@ -39,6 +39,7 @@
 
 // Include application, user and local libraries
 #include "Actuator.h"
+#include "dht.h"
 
 // Define variables and constants
 //
@@ -49,6 +50,8 @@
 Actuator led;
 Actuator fanRelay;
 Actuator valveRelay;
+
+dht dht1;
 
 //
 // Brief	Setup

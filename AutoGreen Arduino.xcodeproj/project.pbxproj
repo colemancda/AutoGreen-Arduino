@@ -251,6 +251,8 @@
 /* Begin PBXFileReference section */
 		6E0C8F0919B28EE400986467 /* Actuator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Actuator.cpp; sourceTree = "<group>"; };
 		6E0C8F0A19B28EE400986467 /* Actuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Actuator.h; sourceTree = "<group>"; };
+		6E367B0019B37ED100031B17 /* dht.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dht.cpp; sourceTree = "<group>"; };
+		6E367B0119B37ED100031B17 /* dht.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dht.h; sourceTree = "<group>"; };
 		6E98FD0F19B2063C00BA535A /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E98FD1219B2063C00BA535A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6E98FD1419B2063C00BA535A /* LocalLibrary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LocalLibrary.cpp; sourceTree = "<group>"; };
@@ -565,6 +567,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		6E367AFF19B37EA800031B17 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				6E367B0119B37ED100031B17 /* dht.h */,
+				6E367B0019B37ED100031B17 /* dht.cpp */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
 		6E98FD0419B2063C00BA535A = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +603,7 @@
 				6E98FD6619B2063C00BA535A /* AutoGreen_Arduino.ino */,
 				6E0C8F0A19B28EE400986467 /* Actuator.h */,
 				6E0C8F0919B28EE400986467 /* Actuator.cpp */,
+				6E367AFF19B37EA800031B17 /* Dependencies */,
 				6E98FD1919B2063C00BA535A /* Sketchbook */,
 				AAAA140830092910AA000000 /* Resources */,
 				6E98FD1B19B2063C00BA535A /* Configurations */,

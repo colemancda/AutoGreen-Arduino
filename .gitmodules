@@ -1,0 +1,3 @@
+[submodule "Dependencies/RobTillaartArduino"]
+	path = Dependencies/RobTillaartArduino
+	url = https://github.com/RobTillaart/Arduino.git
