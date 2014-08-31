@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6E0C8F0B19B28EE400986467 /* Actuator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C8F0919B28EE400986467 /* Actuator.cpp */; };
+		6E0C8F0F19B2DF1A00986467 /* RTClib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C8F0D19B2DF1A00986467 /* RTClib.cpp */; };
+		6E0C8F1219B3797800986467 /* dht.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C8F1019B3797800986467 /* dht.cpp */; };
 		6E28FD1619B2063C00BA535A /* LocalLibrary.h in Sources */ = {isa = PBXBuildFile; fileRef = 6E98FD1619B2063C00BA535A /* LocalLibrary.h */; };
 		6E28FD6619B2063C00BA535A /* AutoGreen_Arduino.ino in Sources */ = {isa = PBXBuildFile; fileRef = 6E98FD6619B2063C00BA535A /* AutoGreen_Arduino.ino */; };
 		6E98FD1319B2063C00BA535A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E98FD1219B2063C00BA535A /* main.cpp */; };
@@ -251,6 +253,10 @@
 /* Begin PBXFileReference section */
 		6E0C8F0919B28EE400986467 /* Actuator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Actuator.cpp; sourceTree = "<group>"; };
 		6E0C8F0A19B28EE400986467 /* Actuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Actuator.h; sourceTree = "<group>"; };
+		6E0C8F0D19B2DF1A00986467 /* RTClib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RTClib.cpp; sourceTree = "<group>"; };
+		6E0C8F0E19B2DF1A00986467 /* RTClib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTClib.h; sourceTree = "<group>"; };
+		6E0C8F1019B3797800986467 /* dht.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dht.cpp; sourceTree = "<group>"; };
+		6E0C8F1119B3797800986467 /* dht.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dht.h; sourceTree = "<group>"; };
 		6E98FD0F19B2063C00BA535A /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E98FD1219B2063C00BA535A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6E98FD1419B2063C00BA535A /* LocalLibrary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LocalLibrary.cpp; sourceTree = "<group>"; };
@@ -565,6 +571,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		6E0C8F0C19B2DF0500986467 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				6E0C8F0E19B2DF1A00986467 /* RTClib.h */,
+				6E0C8F0D19B2DF1A00986467 /* RTClib.cpp */,
+				6E0C8F1019B3797800986467 /* dht.cpp */,
+				6E0C8F1119B3797800986467 /* dht.h */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
 		6E98FD0419B2063C00BA535A = {
 			isa = PBXGroup;
 			children = (
@@ -592,6 +609,7 @@
 				6E98FD6619B2063C00BA535A /* AutoGreen_Arduino.ino */,
 				6E0C8F0A19B28EE400986467 /* Actuator.h */,
 				6E0C8F0919B28EE400986467 /* Actuator.cpp */,
+				6E0C8F0C19B2DF0500986467 /* Dependencies */,
 				6E98FD1919B2063C00BA535A /* Sketchbook */,
 				AAAA140830092910AA000000 /* Resources */,
 				6E98FD1B19B2063C00BA535A /* Configurations */,
@@ -1274,6 +1292,7 @@
 				AA2A140830092910AA00002A /* wiring_shift.c in Sources */,
 				AA2A140830092910AA00002B /* WMath.cpp in Sources */,
 				AA2A140830092910AA00002C /* WString.cpp in Sources */,
+				6E0C8F0F19B2DF1A00986467 /* RTClib.cpp in Sources */,
 				AA2A140830092910AA00002D /* WString.h in Sources */,
 				AA2A140830092910AA00002F /* Arduino.h in Sources */,
 				AA2A140830092910AA000030 /* binary.h in Sources */,
@@ -1376,6 +1395,7 @@
 				AA2A140830092910AA000097 /* GSM3ShieldV1ClientProvider.cpp in Sources */,
 				AA2A140830092910AA000098 /* GSM3ShieldV1ClientProvider.h in Sources */,
 				AA2A140830092910AA000099 /* GSM3ShieldV1DataNetworkProvider.cpp in Sources */,
+				6E0C8F1219B3797800986467 /* dht.cpp in Sources */,
 				AA2A140830092910AA00009A /* GSM3ShieldV1DataNetworkProvider.h in Sources */,
 				AA2A140830092910AA00009B /* GSM3ShieldV1DirectModemProvider.cpp in Sources */,
 				AA2A140830092910AA00009C /* GSM3ShieldV1DirectModemProvider.h in Sources */,

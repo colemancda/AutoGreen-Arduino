@@ -39,6 +39,7 @@
 
 // Include application, user and local libraries
 #include "Actuator.h"
+#include "RTClib.h"
 
 // Define variables and constants
 //
@@ -49,6 +50,8 @@
 Actuator led;
 Actuator fanRelay;
 Actuator valveRelay;
+
+RTC_DS1307 rtc;
 
 //
 // Brief	Setup
@@ -72,7 +75,7 @@ void setup() {
 // Add loop code 
 void loop() {
     
-    
+    //
     
 }
 
