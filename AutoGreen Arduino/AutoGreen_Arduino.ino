@@ -72,15 +72,8 @@ void setup() {
 // Add loop code 
 void loop() {
     
-    led.setState(false);
-    fanRelay.setState(false);
     
-    delay(10000);
     
-    led.setState(true);
-    fanRelay.setState(true);
-    
-    delay(500);    
 }
 
 
