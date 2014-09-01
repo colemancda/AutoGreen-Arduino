@@ -47,11 +47,14 @@
 // Details	Each board has a LED but connected to a different pin
 //
 
+long previousMillis = 0; // stores milis
+long interval = 5000; // interval the sensors will be checked (and light will blink)
+
 Actuator led;
 Actuator fanRelay;
 Actuator valveRelay;
 
-dht dht1;
+dht dht;
 
 //
 // Brief	Setup
@@ -60,12 +63,19 @@ dht dht1;
 // Add setup code 
 void setup() {
     
+    // Serial
+    Serial.begin(9600);
+    Serial.println("Initializing Automated Modular Greenhouse...");
+    
     // Setup Actuators
     
     led.setPin(13);
     fanRelay.setPin(12);
     valveRelay.setPin(11);
     
+    // finish initialzation
+    
+    Serial.println("Finished Initialization");
 }
 
 //
@@ -75,15 +85,27 @@ void setup() {
 // Add loop code 
 void loop() {
     
-    led.setState(false);
-    fanRelay.setState(false);
+    // read from Bluetooth...
     
-    delay(10000);
     
-    led.setState(true);
-    fanRelay.setState(true);
     
-    delay(500);    
+    // get sensor data at intervals...
+    
+    unsigned long currentMillis = millis();
+    
+    if (currentMillis - previousMillis > interval) {
+        
+        // save the last time you blinked the LED
+        previousMillis = currentMillis;
+        
+        // activate actuators
+        
+        led.setState(!led.state());
+        fanRelay.setState(!fanRelay.state());
+        
+        Serial.println(led.state());
+        
+    }
 }
 
 
