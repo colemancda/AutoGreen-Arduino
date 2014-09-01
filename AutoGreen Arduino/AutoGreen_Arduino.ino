@@ -55,6 +55,10 @@ Actuator fanRelay;
 Actuator valveRelay;
 
 dht dht;
+const int dhtPin = 9;
+
+int temperature = -1;
+int humidity = -1;
 
 //
 // Brief	Setup
@@ -72,6 +76,10 @@ void setup() {
     led.setPin(13);
     fanRelay.setPin(12);
     valveRelay.setPin(11);
+    
+    // setup sensors
+    
+    dht.read(9);
     
     // finish initialzation
     
@@ -103,8 +111,42 @@ void loop() {
         led.setState(!led.state());
         fanRelay.setState(!fanRelay.state());
         
-        Serial.println(led.state());
+        // read from sensors
         
+        Serial.println("Reading info from DHT...");
+        
+        int dhtCheckSum = dht.read11(dhtPin);
+        
+        switch (dhtCheckSum)
+        {
+            case DHTLIB_OK:
+                Serial.println("Checksum ok");
+                
+                // read stats
+                
+                Serial.print("DHT Humidity: ");
+                Serial.print(dht.humidity);
+                humidity = dht.humidity;
+                Serial.println("");
+                
+                Serial.print("DHT Temperature: ");
+                Serial.print(dht.temperature);
+                temperature = dht.temperature;
+                Serial.println("");
+                
+                break;
+            case DHTLIB_ERROR_CHECKSUM:
+                Serial.println("Checksum error");
+                break;
+            case DHTLIB_ERROR_TIMEOUT:
+                Serial.println("Time out error");
+                break;
+            default: 
+                Serial.println("Unknown error");
+                break;
+        }
+        
+        Serial.println("");
     }
 }
 
