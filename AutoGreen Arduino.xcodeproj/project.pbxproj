@@ -251,8 +251,10 @@
 /* Begin PBXFileReference section */
 		6E0C8F0919B28EE400986467 /* Actuator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Actuator.cpp; sourceTree = "<group>"; };
 		6E0C8F0A19B28EE400986467 /* Actuator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Actuator.h; sourceTree = "<group>"; };
-		6E367B0019B37ED100031B17 /* dht.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dht.cpp; sourceTree = "<group>"; };
-		6E367B0119B37ED100031B17 /* dht.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dht.h; sourceTree = "<group>"; };
+		6E367B0019B37ED100031B17 /* dht.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dht.cpp; path = ../Dependencies/RobTillaartArduino/libraries/DHTlib/dht.cpp; sourceTree = "<group>"; };
+		6E367B0119B37ED100031B17 /* dht.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dht.h; path = ../Dependencies/RobTillaartArduino/libraries/DHTlib/dht.h; sourceTree = "<group>"; };
+		6E82E2BF19BE972300FCDAAE /* PID_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PID_v1.cpp; path = ../Dependencies/PID/PID_v1/PID_v1.cpp; sourceTree = "<group>"; };
+		6E82E2C019BE972300FCDAAE /* PID_v1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PID_v1.h; path = ../Dependencies/PID/PID_v1/PID_v1.h; sourceTree = "<group>"; };
 		6E98FD0F19B2063C00BA535A /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E98FD1219B2063C00BA535A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		6E98FD1419B2063C00BA535A /* LocalLibrary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LocalLibrary.cpp; sourceTree = "<group>"; };
@@ -572,6 +574,8 @@
 			children = (
 				6E367B0119B37ED100031B17 /* dht.h */,
 				6E367B0019B37ED100031B17 /* dht.cpp */,
+				6E82E2C019BE972300FCDAAE /* PID_v1.h */,
+				6E82E2BF19BE972300FCDAAE /* PID_v1.cpp */,
 			);
 			name = Dependencies;
 			sourceTree = "<group>";

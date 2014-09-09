@@ -10,6 +10,8 @@
 	<string>AutoGreen Arduino</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>8ADE372E-A3DF-4113-AF10-48DD3A7972A3</key>
+		<string>https://github.com/br3ttb/Arduino-PID-Library.git</string>
 		<key>B4F00662-9EF0-4068-981C-9EF0E62AAF52</key>
 		<string>https://github.com/colemancda/AutoGreen-Arduino.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>AutoGreen Arduino.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>8ADE372E-A3DF-4113-AF10-48DD3A7972A3</key>
+		<string>../../Dependencies/PID</string>
 		<key>B4F00662-9EF0-4068-981C-9EF0E62AAF52</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>B4F00662-9EF0-4068-981C-9EF0E62AAF52</string>
 			<key>IDESourceControlWCCName</key>
 			<string>AutoGreen Arduino</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8ADE372E-A3DF-4113-AF10-48DD3A7972A3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PID</string>
 		</dict>
 	</array>
 </dict>

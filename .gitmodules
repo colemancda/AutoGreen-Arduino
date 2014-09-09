@@ -1,3 +1,6 @@
 [submodule "Dependencies/RobTillaartArduino"]
 	path = Dependencies/RobTillaartArduino
 	url = https://github.com/RobTillaart/Arduino.git
+[submodule "Dependencies/PID"]
+	path = Dependencies/PID
+	url = https://github.com/br3ttb/Arduino-PID-Library.git
