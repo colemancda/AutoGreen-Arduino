@@ -47,6 +47,8 @@
 // Details	Each board has a LED but connected to a different pin
 //
 
+#define InvalidValue -1
+
 long previousMillis = 0; // stores milis
 long interval = 5000; // interval the sensors will be checked (and light will blink)
 
@@ -57,8 +59,8 @@ Actuator valveRelay;
 dht dht;
 const int dhtPin = 9;
 
-int temperature = -1;
-int humidity = -1;
+int temperature = InvalidValue;
+int humidity = InvalidValue;
 
 //
 // Brief	Setup
@@ -83,7 +85,7 @@ void setup() {
     
     // finish initialzation
     
-    Serial.println("Finished Initialization");
+    Serial.println("Finished Initialization\n");
 }
 
 //
@@ -92,6 +94,13 @@ void setup() {
 //
 // Add loop code 
 void loop() {
+    
+    // turn LED off
+    
+    if (led.state() == true) {
+        
+        led.setState(false);
+    }
     
     // read from Bluetooth...
     
@@ -111,7 +120,13 @@ void loop() {
         led.setState(!led.state());
         fanRelay.setState(!fanRelay.state());
         
-        // read from sensors
+        // read from sensors...
+        
+        // read from soil humidity
+        
+        Serial.println("Reading info from Soil Humidity Sensor...");
+        
+        // read from DHT
         
         Serial.println("Reading info from DHT...");
         
