@@ -716,8 +716,8 @@
 		6E864C0919D733E400C8286E /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				6E864C1419D736B400C8286E /* PID_v1.cpp */,
 				6E864C1519D736B400C8286E /* PID_v1.h */,
+				6E864C1419D736B400C8286E /* PID_v1.cpp */,
 				6E864C1219D7368F00C8286E /* dht.h */,
 				6E864C1119D7368F00C8286E /* dht.cpp */,
 			);

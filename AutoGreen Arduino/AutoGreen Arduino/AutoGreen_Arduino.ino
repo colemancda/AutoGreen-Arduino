@@ -80,7 +80,7 @@ void setup() {
     // Setup Actuators
     
     led.setPin(13);
-    fanRelay.setPin(12);
+    fanRelay.setPin(8);
     valveRelay.setPin(11);
     
     // setup sensors
@@ -112,6 +112,8 @@ void loop() {
         
         led.setState(!led.state());
         fanRelay.setState(!fanRelay.state());
+        
+        Serial.println(fanRelay.state());
         
         // read from sensors...
         
