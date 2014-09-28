@@ -43,7 +43,7 @@
 // 3rd party libraries
 #include "dht.h"
 #include "PID_v1.h"
-#include "DS1307.h"
+//#include "DS1307.h"
 
 
 // Define variables and constants
@@ -69,7 +69,7 @@ int humidity = InvalidValue;
 
 // PID
 double Setpoint, Input, Output;
-int WindowSize = 10000;
+int WindowSize = 5000;
 unsigned long windowStartTime;
 PID myPID(&Input, &Output, &Setpoint, 2, 5, 1, DIRECT);
 
@@ -89,9 +89,6 @@ void setup() {
     led.setPin(13);
     fanRelay.setPin(11);
     valveRelay.setPin(10);
-    
-    // setup sensors
-    dht.read(9);
     
     windowStartTime = millis();
     
@@ -125,8 +122,7 @@ void loop() {
         previousMillis = currentMillis;
         
         // activate actuators
-        
-        led.setState(!led.state());
+        led.setState(true);
         
         // read from sensors...
         
@@ -185,18 +181,18 @@ void loop() {
     // calculate PID...
     myPID.Compute();
     
-    unsigned long now = currentMillis
-    if(now - windowStartTime > WindowSize)
+    unsigned long now = currentMillis;
+    if (now - windowStartTime > WindowSize)
     {
         //time to shift the Relay Window
         windowStartTime += WindowSize;
+        
+        Serial.println("Shift relay window");
+        Serial.println((bool)(Output > now - windowStartTime));
     }
-    if (Output > now - windowStartTime) {
-        fanRelay.setState(true);
-    }
-    else {
-        fanRelay.setState(false);
-    }
+    
+    bool fanRelayState = !(bool)(Output > now - windowStartTime);
+    fanRelay.setState(fanRelayState);
     
     // read from Bluetooth...
     
