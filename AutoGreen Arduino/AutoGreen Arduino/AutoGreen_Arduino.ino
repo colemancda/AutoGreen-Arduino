@@ -93,7 +93,7 @@ void setup() {
     windowStartTime = millis();
     
     //initialize the variables we're linked to
-    Setpoint = 20;
+    Setpoint = 30;
     
     //tell the PID to range between 0 and the full window size
     myPID.SetOutputLimits(0, WindowSize);
@@ -171,6 +171,14 @@ void loop() {
         }
         
         Serial.println("");
+        
+        // Print fan status
+        Serial.println("Fan Stats...");
+        Serial.print("Fan power state: ");
+        Serial.print(fanRelay.state());
+        Serial.println("");
+        
+        Serial.println("");
     }
     
     // turn LED off if on
@@ -186,12 +194,9 @@ void loop() {
     {
         //time to shift the Relay Window
         windowStartTime += WindowSize;
-        
-        Serial.println("Shift relay window");
-        Serial.println((bool)(Output > now - windowStartTime));
     }
     
-    bool fanRelayState = !(bool)(Output > now - windowStartTime);
+    bool fanRelayState = (bool)(Output > now - windowStartTime);
     fanRelay.setState(fanRelayState);
     
     // read from Bluetooth...
