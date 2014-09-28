@@ -42,7 +42,6 @@
 
 // 3rd party libraries
 #include "dht.h"
-#include "PID_v1.h"
 //#include "DS1307.h"
 
 
@@ -67,12 +66,7 @@ const int dhtPin = 12;
 int temperature = InvalidValue;
 int humidity = InvalidValue;
 
-// PID
-double Setpoint, Input, Output;
-int WindowSize = 5000;
-unsigned long windowStartTime;
-PID myPID(&Input, &Output, &Setpoint, 2, 5, 1, DIRECT);
-
+int targetTemperature = 23;
 
 //
 // Brief	Setup
@@ -89,17 +83,6 @@ void setup() {
     led.setPin(13);
     fanRelay.setPin(11);
     valveRelay.setPin(10);
-    
-    windowStartTime = millis();
-    
-    //initialize the variables we're linked to
-    Setpoint = 30;
-    
-    //tell the PID to range between 0 and the full window size
-    myPID.SetOutputLimits(0, WindowSize);
-    
-    //turn the PID on
-    myPID.SetMode(AUTOMATIC);
     
     // finish initialzation
     Serial.println("Finished Initialization\n");
@@ -121,7 +104,7 @@ void loop() {
         // save the last time you blinked the LED
         previousMillis = currentMillis;
         
-        // activate actuators
+        // blink led
         led.setState(true);
         
         // read from sensors...
@@ -155,9 +138,6 @@ void loop() {
                 temperature = dht.temperature;
                 Serial.println("");
                 
-                // set input for PID
-                Input = temperature;
-                
                 break;
             case DHTLIB_ERROR_CHECKSUM:
                 Serial.println("Checksum error");
@@ -172,12 +152,34 @@ void loop() {
         
         Serial.println("");
         
-        // Print fan status
+        // Control fan...
         Serial.println("Fan Stats...");
         Serial.print("Fan power state: ");
         Serial.print(fanRelay.state());
         Serial.println("");
         
+        // turn on / off fan
+        if (temperature != InvalidValue && targetTemperature != temperature) {
+            
+            if (targetTemperature < temperature && fanRelay.state() != true) {
+                Serial.println("Turning fan on to cool");
+                fanRelay.setState(true);
+            }
+            if (targetTemperature > temperature && fanRelay.state() != false) {
+                Serial.println("Turning fan off to warm");
+                fanRelay.setState(false);;
+            }
+        }
+        Serial.println("");
+        
+        // Saved variables
+        Serial.println("Saved variables...");
+        Serial.print("Target temperature: ");
+        Serial.print((double)(targetTemperature));
+        Serial.println("");
+        
+        
+        Serial.println("");
         Serial.println("");
     }
     
@@ -185,19 +187,6 @@ void loop() {
     if (led.state() == true) {
         led.setState(false);
     }
-    
-    // calculate PID...
-    myPID.Compute();
-    
-    unsigned long now = currentMillis;
-    if (now - windowStartTime > WindowSize)
-    {
-        //time to shift the Relay Window
-        windowStartTime += WindowSize;
-    }
-    
-    bool fanRelayState = (bool)(Output > now - windowStartTime);
-    fanRelay.setState(fanRelayState);
     
     // read from Bluetooth...
     

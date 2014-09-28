@@ -9,4 +9,4 @@ Builds/main.o: main.cpp \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/Printable.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/cores/arduino/new.h \
   /Applications/Arduino.app/Contents/Resources/Java/hardware/arduino/variants/standard/pins_arduino.h \
-  AutoGreen_Arduino.ino Actuator.h dht.h PID_v1.h
+  AutoGreen_Arduino.ino Actuator.h dht.h
