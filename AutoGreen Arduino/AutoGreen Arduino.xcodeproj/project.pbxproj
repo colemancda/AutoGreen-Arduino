@@ -13,6 +13,7 @@
 		6E864BA219D7338900C8286E /* LocalLibrary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E864BA119D7338900C8286E /* LocalLibrary.cpp */; };
 		6E864C1319D7368F00C8286E /* dht.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E864C1119D7368F00C8286E /* dht.cpp */; };
 		6E864C1619D736B400C8286E /* PID_v1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E864C1419D736B400C8286E /* PID_v1.cpp */; };
+		6E864C1919D7BF8500C8286E /* DS1307.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E864C1719D7BF8500C8286E /* DS1307.cpp */; };
 		AA2A140927140428AA000005 /* Arduino.h in Sources */ = {isa = PBXBuildFile; fileRef = AAAA140927140428AA000005 /* Arduino.h */; };
 		AA2A140927140428AA000007 /* malloc.c in Sources */ = {isa = PBXBuildFile; fileRef = AAAA140927140428AA000007 /* malloc.c */; };
 		AA2A140927140428AA000008 /* realloc.c in Sources */ = {isa = PBXBuildFile; fileRef = AAAA140927140428AA000008 /* realloc.c */; };
@@ -333,6 +334,8 @@
 		6E864C1219D7368F00C8286E /* dht.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dht.h; sourceTree = "<group>"; };
 		6E864C1419D736B400C8286E /* PID_v1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PID_v1.cpp; sourceTree = "<group>"; };
 		6E864C1519D736B400C8286E /* PID_v1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PID_v1.h; sourceTree = "<group>"; };
+		6E864C1719D7BF8500C8286E /* DS1307.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS1307.cpp; sourceTree = "<group>"; };
+		6E864C1819D7BF8500C8286E /* DS1307.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS1307.h; sourceTree = "<group>"; };
 		AAAA140927140428AA000005 /* Arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arduino.h; sourceTree = "<group>"; };
 		AAAA140927140428AA000007 /* malloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = malloc.c; sourceTree = "<group>"; };
 		AAAA140927140428AA000008 /* realloc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = realloc.c; sourceTree = "<group>"; };
@@ -716,6 +719,8 @@
 		6E864C0919D733E400C8286E /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				6E864C1819D7BF8500C8286E /* DS1307.h */,
+				6E864C1719D7BF8500C8286E /* DS1307.cpp */,
 				6E864C1519D736B400C8286E /* PID_v1.h */,
 				6E864C1419D736B400C8286E /* PID_v1.cpp */,
 				6E864C1219D7368F00C8286E /* dht.h */,
@@ -1323,6 +1328,7 @@
 				AA2A140927140428AA00004A /* wiring.c in Sources */,
 				AA2A140927140428AA00004B /* wiring_analog.c in Sources */,
 				AA2A140927140428AA00004C /* wiring_digital.c in Sources */,
+				6E864C1919D7BF8500C8286E /* DS1307.cpp in Sources */,
 				AA2A140927140428AA00004D /* wiring_private.h in Sources */,
 				AA2A140927140428AA00004E /* wiring_pulse.c in Sources */,
 				AA2A140927140428AA00004F /* wiring_shift.c in Sources */,

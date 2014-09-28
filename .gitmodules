@@ -4,3 +4,6 @@
 [submodule "Dependencies/PID"]
 	path = Dependencies/PID
 	url = https://github.com/br3ttb/Arduino-PID-Library.git
+[submodule "Dependencies/DS1307-Turicas"]
+	path = Dependencies/DS1307-Turicas
+	url = https://github.com/turicas/DS1307.git

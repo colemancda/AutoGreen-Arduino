@@ -8,10 +8,10 @@
 // 				ColemanCDA
 //
 // Date			9/27/14 2:03 PM
-// Version		<#version#>
+// Version		1.0
 // 
 // Copyright	© Alsey Coleman Miller, 2014
-// License		<#license#>
+// License		1.0
 //
 // See			ReadMe.txt for references
 //
@@ -43,6 +43,7 @@
 // 3rd party libraries
 #include "dht.h"
 #include "PID_v1.h"
+#include "DS1307.h"
 
 
 // Define variables and constants
@@ -61,10 +62,17 @@ Actuator fanRelay;
 Actuator valveRelay;
 
 dht dht;
-const int dhtPin = 9;
+const int dhtPin = 12;
 
 int temperature = InvalidValue;
 int humidity = InvalidValue;
+
+// PID
+double Setpoint, Input, Output;
+int WindowSize = 10000;
+unsigned long windowStartTime;
+PID myPID(&Input, &Output, &Setpoint, 2, 5, 1, DIRECT);
+
 
 //
 // Brief	Setup
@@ -78,17 +86,25 @@ void setup() {
     Serial.println("Initializing Automated Modular Greenhouse...");
     
     // Setup Actuators
-    
     led.setPin(13);
-    fanRelay.setPin(8);
-    valveRelay.setPin(11);
+    fanRelay.setPin(11);
+    valveRelay.setPin(10);
     
     // setup sensors
-    
     dht.read(9);
     
-    // finish initialzation
+    windowStartTime = millis();
     
+    //initialize the variables we're linked to
+    Setpoint = 20;
+    
+    //tell the PID to range between 0 and the full window size
+    myPID.SetOutputLimits(0, WindowSize);
+    
+    //turn the PID on
+    myPID.SetMode(AUTOMATIC);
+    
+    // finish initialzation
     Serial.println("Finished Initialization\n");
 }
 
@@ -111,15 +127,14 @@ void loop() {
         // activate actuators
         
         led.setState(!led.state());
-        fanRelay.setState(!fanRelay.state());
-        
-        Serial.println(fanRelay.state());
         
         // read from sensors...
         
+        /*
         // read from soil humidity
         
         Serial.println("Reading info from Soil Humidity Sensor...");
+         */
         
         // read from DHT
         
@@ -144,6 +159,9 @@ void loop() {
                 temperature = dht.temperature;
                 Serial.println("");
                 
+                // set input for PID
+                Input = temperature;
+                
                 break;
             case DHTLIB_ERROR_CHECKSUM:
                 Serial.println("Checksum error");
@@ -159,15 +177,31 @@ void loop() {
         Serial.println("");
     }
     
-    // turn LED off
-    
+    // turn LED off if on
     if (led.state() == true) {
-        
         led.setState(false);
+    }
+    
+    // calculate PID...
+    myPID.Compute();
+    
+    unsigned long now = currentMillis
+    if(now - windowStartTime > WindowSize)
+    {
+        //time to shift the Relay Window
+        windowStartTime += WindowSize;
+    }
+    if (Output > now - windowStartTime) {
+        fanRelay.setState(true);
+    }
+    else {
+        fanRelay.setState(false);
     }
     
     // read from Bluetooth...
     
     
     // control environment based on sensors and settings...
+    
+    
 }
