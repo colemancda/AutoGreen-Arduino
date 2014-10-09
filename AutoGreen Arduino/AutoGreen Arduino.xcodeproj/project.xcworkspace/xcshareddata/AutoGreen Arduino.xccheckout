@@ -5,22 +5,18 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>EC306AE7-E008-42D7-937D-D17318F7A185</string>
+	<string>C915E75F-C458-4354-9445-A5413BC4BAF7</string>
 	<key>IDESourceControlProjectName</key>
-	<string>AutoGreen Arduino</string>
+	<string>Autogreen Arduino</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>46E4717C0659A4C96D9DBF3C770CE9F98C6F3C6A</key>
-		<string>https://github.com/RobTillaart/Arduino.git</string>
 		<key>CD82BCB854A7548964191BFC960025794B5A68B2</key>
 		<string>https://github.com/colemancda/AutoGreen-Arduino.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>AutoGreen Arduino/AutoGreen Arduino.xcodeproj</string>
+	<string>Autogreen Arduino/Autogreen Arduino.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>46E4717C0659A4C96D9DBF3C770CE9F98C6F3C6A</key>
-		<string>../../..Dependencies/RobTillaartArduino/</string>
 		<key>CD82BCB854A7548964191BFC960025794B5A68B2</key>
 		<string>../../..</string>
 	</dict>
@@ -39,14 +35,6 @@
 			<string>CD82BCB854A7548964191BFC960025794B5A68B2</string>
 			<key>IDESourceControlWCCName</key>
 			<string>AutoGreen%20Arduino</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>46E4717C0659A4C96D9DBF3C770CE9F98C6F3C6A</string>
-			<key>IDESourceControlWCCName</key>
-			<string>RobTillaartArduino</string>
 		</dict>
 	</array>
 </dict>

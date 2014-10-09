@@ -8,7 +8,7 @@
 # All rights reserved
 #
 #
-# Last update: Jul 31, 2014 release 171
+# Last update: Sep 06, 2014 release 176
 
 
 # Galileo x86 specifics
@@ -29,9 +29,9 @@ BOARDS_TXT       := $(APPLICATION_PATH)/hardware/arduino/x86/boards.txt
 # Tested by Mike Roberts 
 #
 UPLOADER         = izmirdl
-IZMIR_PATH       = $(APPLICATION_PATH)/hardware/arduino/x86/tools/izmir
-IZMIR            = $(UTILITIES_PATH)/clupload_osx.sh
-IZMIR_OPTS       = $(APPLICATION_PATH)/hardware/tools/x86/bin
+UPLOADER_PATH    = $(APPLICATION_PATH)/hardware/arduino/x86/tools/izmir
+UPLOADER_EXEC    = $(UTILITIES_PATH)/uploader_izmir.sh
+UPLOADER_OPTS    = $(APPLICATION_PATH)/hardware/tools/x86/bin
 
 # Sketchbook/Libraries path
 # wildcard required for ~ management
@@ -75,7 +75,7 @@ BOARD    = $(call PARSE_BOARD,$(BOARD_TAG),board)
 VARIANT  = $(call PARSE_BOARD,$(BOARD_TAG),build.variant)
 VARIANT_PATH = $(APPLICATION_PATH)/hardware/arduino/x86/variants/$(VARIANT)
 VARIANT_CPP_SRCS  = $(wildcard $(VARIANT_PATH)/*.cpp) # */  $(VARIANT_PATH)/*/*.cpp #*/
-VARIANT_OBJ_FILES = $(VARIANT_CPP_SRCS:.cpp=.o)
+VARIANT_OBJ_FILES = $(VARIANT_CPP_SRCS:.cpp=.cpp.o)
 VARIANT_OBJS      = $(patsubst $(VARIANT_PATH)/%,$(OBJDIR)/%,$(VARIANT_OBJ_FILES))
 
 #SYSTEM_LIB  = $(call PARSE_BOARD,$(BOARD_TAG),build.variant_system_lib)
@@ -110,16 +110,16 @@ ifneq ($(APP_LIBS_LIST),0)
     APP_LIB_CPP_SRC = $(wildcard $(patsubst %,%/*.cpp,$(APP_LIBS))) # */
     APP_LIB_C_SRC   = $(wildcard $(patsubst %,%/*.c,$(APP_LIBS))) # */
 
-    APP_LIB_OBJS    = $(patsubst $(APP_LIB_PATH)/%.cpp,$(OBJDIR)/libs/%.o,$(APP_LIB_CPP_SRC))
-    APP_LIB_OBJS   += $(patsubst $(APP_LIB_PATH)/%.c,$(OBJDIR)/libs/%.o,$(APP_LIB_C_SRC))
+    APP_LIB_OBJS    = $(patsubst $(APP_LIB_PATH)/%.cpp,$(OBJDIR)/libs/%.cpp.o,$(APP_LIB_CPP_SRC))
+    APP_LIB_OBJS   += $(patsubst $(APP_LIB_PATH)/%.c,$(OBJDIR)/libs/%.c.o,$(APP_LIB_C_SRC))
 
     BUILD_APP_LIBS        = $(patsubst %,$(BUILD_APP_LIB_PATH)/%,$(BUILD_APP_LIBS_LIST))
 
     BUILD_APP_LIB_CPP_SRC = $(wildcard $(patsubst %,%/*.cpp,$(BUILD_APP_LIBS))) # */
     BUILD_APP_LIB_C_SRC   = $(wildcard $(patsubst %,%/*.c,$(BUILD_APP_LIBS))) # */
 
-    BUILD_APP_LIB_OBJS    = $(patsubst $(BUILD_APP_LIB_PATH)/%.cpp,$(OBJDIR)/libs/%.o,$(BUILD_APP_LIB_CPP_SRC))
-    BUILD_APP_LIB_OBJS   += $(patsubst $(BUILD_APP_LIB_PATH)/%.c,$(OBJDIR)/libs/%.o,$(BUILD_APP_LIB_C_SRC))
+    BUILD_APP_LIB_OBJS    = $(patsubst $(BUILD_APP_LIB_PATH)/%.cpp,$(OBJDIR)/libs/%.cpp.o,$(BUILD_APP_LIB_CPP_SRC))
+    BUILD_APP_LIB_OBJS   += $(patsubst $(BUILD_APP_LIB_PATH)/%.c,$(OBJDIR)/libs/%.c.o,$(BUILD_APP_LIB_C_SRC))
 endif
 
 #SYSTEM_FLAGS    = -I$(APPLICATION_PATH)/hardware/arduino/sam/system/libsam
@@ -158,5 +158,5 @@ TARGET_HEXBIN = $(TARGET_HEX)
 # Arduino Due serial 1200 reset
 #
 #USB_TOUCH := $(call PARSE_BOARD,$(BOARD_TAG),upload.protocol)
-#USB_RESET  = $(UTILITIES_PATH)/serial1200.py
+#USB_RESET  = $(UTILITIES_PATH)/reset_1200.py
 

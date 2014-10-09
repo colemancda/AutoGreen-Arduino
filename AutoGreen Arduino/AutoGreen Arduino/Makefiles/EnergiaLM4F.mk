@@ -8,7 +8,7 @@
 # All rights reserved
 #
 #
-# Last update: Jul 05, 2014 release 165
+# Last update: Sep 06, 2014 release 176
 
 
 
@@ -46,13 +46,13 @@ BUILD_CORE_LIBS_LIST = $(subst .h,,$(subst $(BUILD_CORE_LIB_PATH)/,,$(wildcard $
 
 BUILD_CORE_C_SRCS    = $(wildcard $(BUILD_CORE_LIB_PATH)/*.c) # */
 
-ifneq ($(strip $(NO_CORE_MAIN_FUNCTION)),)
+#ifneq ($(strip $(NO_CORE_MAIN_FUNCTION)),)
     BUILD_CORE_CPP_SRCS = $(filter-out %program.cpp %main.cpp,$(wildcard $(BUILD_CORE_LIB_PATH)/*.cpp)) # */
-else
-    BUILD_CORE_CPP_SRCS = $(filter-out %program.cpp, $(wildcard $(BUILD_CORE_LIB_PATH)/*.cpp)) # */
-endif
+#else
+#    BUILD_CORE_CPP_SRCS = $(filter-out %program.cpp, $(wildcard $(BUILD_CORE_LIB_PATH)/*.cpp)) # */
+#endif
 
-BUILD_CORE_OBJ_FILES  = $(BUILD_CORE_C_SRCS:.c=.o) $(BUILD_CORE_CPP_SRCS:.cpp=.o)
+BUILD_CORE_OBJ_FILES  = $(BUILD_CORE_C_SRCS:.c=.c.o) $(BUILD_CORE_CPP_SRCS:.cpp=.cpp.o)
 BUILD_CORE_OBJS       = $(patsubst $(BUILD_CORE_LIB_PATH)/%,$(OBJDIR)/%,$(BUILD_CORE_OBJ_FILES))
 
 # Sketchbook/Libraries path
@@ -96,13 +96,17 @@ LDSCRIPT = $(call PARSE_BOARD,$(BOARD_TAG),ldscript)
 VARIANT  = $(call PARSE_BOARD,$(BOARD_TAG),build.variant)
 VARIANT_PATH = $(APPLICATION_PATH)/hardware/lm4f/variants/$(VARIANT)
 
+ifeq ($(MAKECMDGOALS),debug)
+    OPTIMISATION   = -O0 -ggdb
+endif
+
 MCU_FLAG_NAME   = mcpu
 EXTRA_LDFLAGS   = -nostartfiles -T$(CORE_LIB_PATH)/$(LDSCRIPT) -Wl,--gc-sections -Wl,-Map=$(OBJDIR)/lm4f.map
 EXTRA_LDFLAGS  += -mthumb --entry=ResetISR
 EXTRA_LDFLAGS  += -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant -nostdlib
 
 EXTRA_CPPFLAGS  = $(addprefix -D, $(PLATFORM_TAG)) -I$(VARIANT_PATH)
-EXTRA_CPPFLAGS += -fno-exceptions -fno-rtti -mthumb
+EXTRA_CPPFLAGS += -fno-exceptions -fno-rtti -mthumb $(OPTIMISATION)
 EXTRA_CPPFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant
 
 OBJCOPYFLAGS  = -v -Obinary 

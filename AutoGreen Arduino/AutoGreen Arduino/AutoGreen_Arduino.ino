@@ -1,26 +1,51 @@
-// 
-// AutoGreen Arduino 
-//
-// Arduino-based Automated Modular Greenhouse
-// Developed with [embedXcode](http://embedXcode.weebly.com)
-// 
-// Author	 	Alsey Coleman Miller
-// 				ColemanCDA
-//
-// Date			9/27/14 2:03 PM
-// Version		1.0
-// 
-// Copyright	© Alsey Coleman Miller, 2014
-// License		1.0
-//
-// See			ReadMe.txt for references
-//
+/// 
+/// @mainpage	Autogreen Arduino 
+///
+/// @details	Arduino-based Automated Modular Greenhouse
+/// @n 		
+/// @n 
+/// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
+/// 
+/// @author		Alsey Coleman Miller
+/// @author		ColemanCDA
+/// @date		10/4/14 10:05 PM
+/// @version	<#version#>
+/// 
+/// @copyright	(c) Alsey Coleman Miller, 2014
+/// @copyright	All rights reserved
+///
+/// @see		ReadMe.txt for references
+///
+
+
+///
+/// @file		Autogreen_Arduino.ino
+/// @brief		Main sketch
+///
+/// @details	<#details#>
+/// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
+/// 
+/// @author		Alsey Coleman Miller
+/// @author		ColemanCDA
+/// @date		10/4/14 10:05 PM
+/// @version	<#version#>
+/// 
+/// @copyright	(c) Alsey Coleman Miller, 2014
+/// @copyright	All rights reserved
+///
+/// @see		ReadMe.txt for references
+/// @n
+///
+
 
 // Core library for code-sense - IDE-based
 #if defined(WIRING) // Wiring specific
 #include "Wiring.h"
 #elif defined(MAPLE_IDE) // Maple specific
 #include "WProgram.h"
+#elif defined(ROBOTIS)
+#include "libpandora_types.h"
+#include "pandora.h"
 #elif defined(MPIDE) // chipKIT specific
 #include "WProgram.h"
 #elif defined(DIGISPARK) // Digispark specific
@@ -31,6 +56,8 @@
 #include "Arduino.h"
 #elif defined(TEENSYDUINO) // Teensy specific
 #include "Arduino.h"
+#elif defined(RFDUINO) // RFduino specific
+#include "Arduino.h"
 #elif defined(ARDUINO) // Arduino 1.0 and 1.5 specific
 #include "Arduino.h"
 #else // error
@@ -38,18 +65,21 @@
 #endif // end IDE
 
 // Include application, user and local libraries
+#include "LocalLibrary.h"
 #include "Actuator.h"
 
 // 3rd party libraries
 #include "dht.h"
-//#include "DS1307.h"
+
+
+// Prototypes
 
 
 // Define variables and constants
-//
-// Brief	Name of the LED
-// Details	Each board has a LED but connected to a different pin
-//
+///
+/// @brief	Name of the LED
+/// @details	Each board has a LED but connected to a different pin
+///
 
 #define InvalidValue -1
 
@@ -61,20 +91,20 @@ Actuator fanRelay;
 Actuator valveRelay;
 
 dht dht;
-const int dhtPin = 12;
+const int dhtPin = 1;
 
 int temperature = InvalidValue;
 int humidity = InvalidValue;
 
 int targetTemperature = 23;
 
-//
-// Brief	Setup
-// Details	Define the pin the LED is connected to
-//
+///
+/// @brief	Setup
+/// @details	Define the pin the LED is connected to
+///
 // Add setup code
-void setup() {
-    
+void setup() 
+{
     // Serial
     Serial.begin(9600);
     Serial.println("Initializing Automated Modular Greenhouse...");
@@ -88,13 +118,13 @@ void setup() {
     Serial.println("Finished Initialization\n");
 }
 
-//
-// Brief	Loop
-// Details	Blink the LED
-//
+///
+/// @brief	Loop
+/// @details	Call blink
+///
 // Add loop code
-void loop() {
-    
+void loop() 
+{
     // get sensor data at intervals...
     
     unsigned long currentMillis = millis();
@@ -110,9 +140,9 @@ void loop() {
         // read from sensors...
         
         /*
-        // read from soil humidity
-        
-        Serial.println("Reading info from Soil Humidity Sensor...");
+         // read from soil humidity
+         
+         Serial.println("Reading info from Soil Humidity Sensor...");
          */
         
         // read from DHT
@@ -192,6 +222,4 @@ void loop() {
     
     
     // control environment based on sensors and settings...
-    
-    
 }

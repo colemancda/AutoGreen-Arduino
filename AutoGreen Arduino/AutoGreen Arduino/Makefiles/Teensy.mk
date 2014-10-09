@@ -33,8 +33,15 @@ else
     $(error $(BUILD_CORE) unknown) 
 endif
 
-# Teensy USB PID VID
+# Teensy USB kind, layout, PID and VID
 #
+ifndef TEENSY_USB
+    TEENSY_USB    = USB_SERIAL
+endif
+ifndef TEENSY_LAYOUT
+    TEENSY_LAYOUT = LAYOUT_US_ENGLISH
+endif
+
 USB_VID   := $(call PARSE_BOARD,$(BOARD_TAG),build.vid)
 USB_PID   := $(call PARSE_BOARD,$(BOARD_TAG),build.pid)
 
@@ -49,7 +56,7 @@ ifeq ($(USB_FLAGS),)
     USB_FLAGS = -DUSB_VID=null -DUSB_PID=null
 endif
 
-USB_FLAGS += -DUSB_SERIAL -DLAYOUT_US_ENGLISH -DTIME_T=$(shell date +%s)
+USB_FLAGS += -D$(TEENSY_USB) -D$(TEENSY_LAYOUT) -DTIME_T=$(shell date +%s)
 
 MAX_RAM_SIZE = $(call PARSE_BOARD,$(BOARD_TAG),upload.maximum_ram_size)
 

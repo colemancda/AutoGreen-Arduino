@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0600"
+   LastUpgradeVersion = "0610"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6E864B9919D7338900C8286E"
+               BlueprintIdentifier = "6EFA254819E0DEFD0098B612"
                BuildableName = "Upload"
                BlueprintName = "Upload"
-               ReferencedContainer = "container:AutoGreen Arduino.xcodeproj">
+               ReferencedContainer = "container:Autogreen Arduino.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,10 +42,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6E864B9919D7338900C8286E"
+            BlueprintIdentifier = "6EFA254819E0DEFD0098B612"
             BuildableName = "Upload"
             BlueprintName = "Upload"
-            ReferencedContainer = "container:AutoGreen Arduino.xcodeproj">
+            ReferencedContainer = "container:Autogreen Arduino.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -60,10 +60,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6E864B9919D7338900C8286E"
+            BlueprintIdentifier = "6EFA254819E0DEFD0098B612"
             BuildableName = "Upload"
             BlueprintName = "Upload"
-            ReferencedContainer = "container:AutoGreen Arduino.xcodeproj">
+            ReferencedContainer = "container:Autogreen Arduino.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

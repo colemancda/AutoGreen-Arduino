@@ -8,7 +8,7 @@
 # All rights reserved
 #
 #
-# Last update: Jul 31, 2014 release 171
+# Last update: Sep 30, 2014 release 204
 
 
 
@@ -65,47 +65,60 @@ endif
 
 # Arduino.app Mpide.app Wiring.app Energia.app MapleIDE.app paths
 #
-ARDUINO_APP   = /Applications/Arduino.app
-MPIDE_APP     = /Applications/Mpide.app
-WIRING_APP    = /Applications/Wiring.app
-ENERGIA_APP   = /Applications/Energia.app
-MAPLE_APP     = /Applications/MapleIDE.app
+ifndef APPLICATIONS_PATH
+    APPLICATIONS_PATH = /Applications
+endif
+ARDUINO_APP   = $(APPLICATIONS_PATH)/Arduino.app
+MPIDE_APP     = $(APPLICATIONS_PATH)/Mpide.app
+WIRING_APP    = $(APPLICATIONS_PATH)/Wiring.app
+ENERGIA_APP   = $(APPLICATIONS_PATH)/Energia.app
+MAPLE_APP     = $(APPLICATIONS_PATH)/MapleIDE.app
+ROBOTIS_APP   = $(APPLICATIONS_PATH)/ROBOTIS_OpenCM.app
+RFDUINO_APP   = $(APPLICATIONS_PATH)/RFduino.app
 
 # Teensyduino.app path
 #
-TEENSY_0    = /Applications/Teensyduino.app
+TEENSY_0    = $(APPLICATIONS_PATH)/Teensyduino.app
 ifneq ($(wildcard $(TEENSY_0)),)
     TEENSY_APP    = $(TEENSY_0)
 else
-    TEENSY_APP    = /Applications/Arduino.app
+    TEENSY_APP    = $(APPLICATIONS_PATH)/Arduino.app
 endif
 
 # DigisparkArduino.app path
 #
-DIGISPARK_0 = /Applications/DigisparkArduino.app
+DIGISPARK_0 = $(APPLICATIONS_PATH)/DigisparkArduino.app
 ifneq ($(wildcard $(DIGISPARK_0)),)
     DIGISPARK_APP = $(DIGISPARK_0)
 else
-    DIGISPARK_APP = /Applications/Arduino.app
+    DIGISPARK_APP = $(APPLICATIONS_PATH)/Arduino.app
 endif
 
 # Microduino.app path
 #
-MICRODUINO_0 = /Applications/Microduino.app
+MICRODUINO_0 = $(APPLICATIONS_PATH)/Microduino.app
 ifneq ($(wildcard $(MICRODUINO_0)),)
     MICRODUINO_APP = $(MICRODUINO_0)
 else
-    MICRODUINO_APP = /Applications/Arduino.app
+    MICRODUINO_APP = $(APPLICATIONS_PATH)/Arduino.app
 endif
 
+# LightBlueIDE.app path
+#
+LIGHTBLUE_0 = $(APPLICATIONS_PATH)/LightBlueIDE.app
+ifneq ($(wildcard $(LIGHTBLUE_0)),)
+    LIGHTBLUE_APP = $(LIGHTBLUE_0)
+else
+    LIGHTBLUE_APP = $(APPLICATIONS_PATH)/Arduino.app
+endif
 
 # GalileoIDE.app path
 #
-GALILEO_0    = /Applications/GalileoIDE.app
+GALILEO_0    = $(APPLICATIONS_PATH)/GalileoIDE.app
 ifneq ($(wildcard $(GALILEO_0)),)
     GALILEO_APP    = $(GALILEO_0)
 else
-    GALILEO_APP    = /Applications/Arduino.app
+    GALILEO_APP    = $(APPLICATIONS_PATH)/Arduino.app
 endif
 
 ifeq ($(wildcard $(ARDUINO_APP)),)
@@ -116,9 +129,14 @@ ifeq ($(wildcard $(ARDUINO_APP)),)
                     ifeq ($(wildcard $(TEENSY_APP)),)
                         ifeq ($(wildcard $(DIGISPARK_APP)),)
                             ifeq ($(wildcard $(MICRODUINO_APP)),)
+                                ifeq ($(wildcard $(LIGHTBLUE_APP)),)
                                     ifeq ($(wildcard $(GALILEO_APP)),)
-                                        $(error Error: no application found)
+                                        ifeq ($(wildcard $(ROBOTIS_APP)),)
+                                            ifeq ($(wildcard $(RFDUINO_APP)),)
+                                            $(error Error: no application found)
+                                        endif
                                     endif
+                                endif
                             endif
                         endif
                     endif
@@ -126,6 +144,7 @@ ifeq ($(wildcard $(ARDUINO_APP)),)
             endif
         endif
     endif
+endif
 endif
 
 # Arduino 1.5.7 nightmare with Java folder locations
@@ -144,7 +163,10 @@ MAPLE_PATH      = $(MAPLE_APP)/Contents/Resources/Java
 TEENSY_PATH     = $(TEENSY_APP)/Contents/Resources/Java
 DIGISPARK_PATH  = $(DIGISPARK_APP)/Contents/Resources/Java
 MICRODUINO_PATH = $(MICRODUINO_APP)/Contents/Resources/Java
+LIGHTBLUE_PATH  = $(LIGHTBLUE_APP)/Contents/Resources/Java
 GALILEO_PATH    = $(GALILEO_APP)/Contents/Resources/Java
+ROBOTIS_PATH    = $(ROBOTIS_APP)/Contents/Resources/Java
+RFDUINO_PATH    = $(RFDUINO_APP)/Contents/Java
 
 # Miscellaneous
 # ----------------------------------
@@ -152,12 +174,13 @@ GALILEO_PATH    = $(GALILEO_APP)/Contents/Resources/Java
 #
 TARGET      := embeddedcomputing
 USER_PATH   := $(wildcard ~/)
-TEMPLATE    := ePsiEJEtRXnDNaFGpywBX9vzeNQP4vUb
+USER_FLAG   := true
+TEMPLATE    := NmiFVEpTZkMqAfrNXJh7pgGKXf6GJLwz
 
 # main.cpp selection
 # = 1 takes local main.cpp
 #
-NO_CORE_MAIN_FUNCTION := 1
+#NO_CORE_MAIN_FUNCTION := 1
 
 # Builds directory
 #
@@ -199,12 +222,18 @@ endif
 # Look if BOARD_TAG is listed as a Teensy/Teensy board
 # Look if BOARD_TAG is listed as a Microduino/Microduino board
 # Look if BOARD_TAG is listed as a Digispark/Digispark board
+# Look if BOARD_TAG is listed as a LightBlueIDE/LightBlue-Bean board
 # Look if BOARD_TAG is listed as a IntelGalileo/arduino/x86 board
 # Order matters!
 #
 
 ifneq ($(MAKECMDGOALS),boards)
     ifneq ($(MAKECMDGOALS),clean)
+
+      ifneq ($(findstring COSA,$(GCC_PREPROCESSOR_DEFINITIONS)),)
+        include $(MAKEFILE_PATH)/Cosa.mk
+
+      else
         ifneq ($(call PARSE_FILE,$(BOARD_TAG),name,$(ARDUINO_PATH)/hardware/arduino/boards.txt),)
             include $(MAKEFILE_PATH)/Arduino.mk
         else ifneq ($(call PARSE_FILE,$(BOARD_TAG),name,$(ARDUINO_PATH)/hardware/arduino/avr/boards.txt),)
@@ -242,11 +271,17 @@ ifneq ($(MAKECMDGOALS),boards)
             include $(MAKEFILE_PATH)/Microduino.mk
         else ifneq ($(call PARSE_FILE,$(BOARD_TAG),name,$(DIGISPARK_PATH)/hardware/digispark/boards.txt),)
             include $(MAKEFILE_PATH)/Digispark.mk
-        else ifneq ($(call PARSE_FILE,$(BOARD_TAG),name,$(GALILEO_PATH)/hardware/arduino/x86/boards.txt),)
-            include $(MAKEFILE_PATH)/Galileo.mk
+        else ifneq ($(call PARSE_FILE,$(BOARD_TAG),name,$(LIGHTBLUE_PATH)/hardware/LightBlue-Bean/boards.txt),)
+            include $(MAKEFILE_PATH)/LightBlue.mk
+        else ifneq ($(call PARSE_FILE,$(BOARD_TAG),name,$(ROBOTIS_PATH)/hardware/robotis/boards.txt),)
+            include $(MAKEFILE_PATH)/Robotis.mk
+        else ifneq ($(call PARSE_FILE,$(BOARD_TAG),name,$(RFDUINO_PATH)/hardware/arduino/RFduino/boards.txt),)
+            include $(MAKEFILE_PATH)/RFduino.mk
+
         else
             $(error $(BOARD_TAG) board is unknown)
         endif
+      endif
     endif
 endif
 

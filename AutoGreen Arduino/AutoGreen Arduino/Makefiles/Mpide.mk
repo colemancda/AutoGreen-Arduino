@@ -67,12 +67,19 @@ OBJDUMP = $(APP_TOOLS_PATH)/pic32-objdump
 OBJCOPY = $(APP_TOOLS_PATH)/pic32-objcopy
 SIZE    = $(APP_TOOLS_PATH)/pic32-size
 NM      = $(APP_TOOLS_PATH)/pic32-nm
-
+MDB     = $(APPLICATIONS_PATH)/microchip/mplabx/mplab_ide.app/Contents/Resources/mplab_ide/bin/mdb.sh
 
 BOARD    = $(call PARSE_BOARD,$(BOARD_TAG),board)
 LDSCRIPT = $(call PARSE_BOARD,$(BOARD_TAG),ldscript)
 VARIANT  = $(call PARSE_BOARD,$(BOARD_TAG),build.variant)
 VARIANT_PATH = $(APPLICATION_PATH)/hardware/pic32/variants/$(VARIANT)
+
+ifeq ($(BOARD_PORT),pgm)
+  OPTIMISATION   = -O0
+  NO_SERIAL_CONSOLE = 1
+else
+  OPTIMISATION   = -O2
+endif
 
 MCU_FLAG_NAME    = mprocessor
 # chipKIT-application-COMMON.ld added by MPIDE release 0023-macosx-20130715

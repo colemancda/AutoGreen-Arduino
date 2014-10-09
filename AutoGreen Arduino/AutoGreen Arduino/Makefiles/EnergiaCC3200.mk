@@ -8,7 +8,7 @@
 # All rights reserved
 #
 #
-# Last update: Sep 01, 2014 release 175
+# Last update: Oct 01, 2014 release 205
 
 
 
@@ -29,7 +29,11 @@ PLATFORM_TAG      = ENERGIA=$(ENERGIA_RELEASE) ARDUINO=$(ARDUINO_RELEASE) EMBEDX
 
 UPLOADER          = cc3200serial
 CC3200SERIAL_PATH = $(APPLICATION_PATH)/hardware/tools
-CC3200SERIAL      = $(CC3200SERIAL_PATH)/lm4f/bin/serial
+ifneq ($(wildcard $(CC3200SERIAL_PATH)/lm4f/bin/serial),)
+    CC3200SERIAL      = $(CC3200SERIAL_PATH)/lm4f/bin/serial
+else
+    CC3200SERIAL      = $(CC3200SERIAL_PATH)/lm4f/bin/cc3200prog
+endif
 CC3200SERIAL_OPTS =
 
 # StellarPad requires a specific command
@@ -46,13 +50,13 @@ BUILD_CORE_LIBS_LIST = $(subst .h,,$(subst $(BUILD_CORE_LIB_PATH)/,,$(wildcard $
 
 BUILD_CORE_C_SRCS    = $(wildcard $(BUILD_CORE_LIB_PATH)/*.c) # */
 
-ifneq ($(strip $(NO_CORE_MAIN_FUNCTION)),)
+#ifneq ($(strip $(NO_CORE_MAIN_FUNCTION)),)
     BUILD_CORE_CPP_SRCS = $(filter-out %program.cpp %main.cpp,$(wildcard $(BUILD_CORE_LIB_PATH)/*.cpp)) # */
-else
-    BUILD_CORE_CPP_SRCS = $(filter-out %program.cpp, $(wildcard $(BUILD_CORE_LIB_PATH)/*.cpp)) # */
-endif
+#else
+#    BUILD_CORE_CPP_SRCS = $(filter-out %program.cpp, $(wildcard $(BUILD_CORE_LIB_PATH)/*.cpp)) # */
+#endif
 
-BUILD_CORE_OBJ_FILES  = $(BUILD_CORE_C_SRCS:.c=.o) $(BUILD_CORE_CPP_SRCS:.cpp=.o)
+BUILD_CORE_OBJ_FILES  = $(BUILD_CORE_C_SRCS:.c=.c.o) $(BUILD_CORE_CPP_SRCS:.cpp=.cpp.o)
 BUILD_CORE_OBJS       = $(patsubst $(BUILD_CORE_LIB_PATH)/%,$(OBJDIR)/%,$(BUILD_CORE_OBJ_FILES))
 
 # Sketchbook/Libraries path
@@ -96,7 +100,11 @@ LDSCRIPT = $(call PARSE_BOARD,$(BOARD_TAG),ldscript)
 VARIANT  = $(call PARSE_BOARD,$(BOARD_TAG),build.variant)
 VARIANT_PATH = $(APPLICATION_PATH)/hardware/cc3200/variants/$(VARIANT)
 
-OPTIMISATION   = -O0
+ifeq ($(MAKECMDGOALS),debug)
+    OPTIMISATION   = -O0 -ggdb
+else
+    OPTIMISATION   = -O0
+endif
 
 MCU_FLAG_NAME   = mcpu
 EXTRA_LDFLAGS   = -nostartfiles -nostdlib -T$(CORE_LIB_PATH)/$(LDSCRIPT) -Wl,--gc-sections

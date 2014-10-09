@@ -80,6 +80,10 @@ BOARD          = $(call PARSE_BOARD,$(BOARD_TAG),board)
 VARIANT        = $(call PARSE_BOARD,$(BOARD_TAG),build.variant)
 VARIANT_PATH   = $(APPLICATION_PATH)/hardware/msp430/variants/$(VARIANT)
 
+ifeq ($(MAKECMDGOALS),debug)
+    OPTIMISATION   = -O0 -ggdb
+endif
+
 MCU_FLAG_NAME  = mmcu
 EXTRA_LDFLAGS  =
 #EXTRA_LDFLAGS = -T$(CORE_LIB_PATH)/$(LDSCRIPT)

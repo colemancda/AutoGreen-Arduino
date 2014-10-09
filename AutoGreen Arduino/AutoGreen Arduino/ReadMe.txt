@@ -1,13 +1,13 @@
 
-  AutoGreen Arduino
+  Autogreen Arduino
   Project
   ----------------------------------
   Developed with embedXcode
 
-  Project AutoGreen Arduino
-  Created by Alsey Coleman Miller on 9/27/14
+  Project Autogreen Arduino
+  Created by Alsey Coleman Miller on 10/4/14
   Copyright © 2014 ColemanCDA
-  License <#license#>
+  License All rights reserved
 
 
 

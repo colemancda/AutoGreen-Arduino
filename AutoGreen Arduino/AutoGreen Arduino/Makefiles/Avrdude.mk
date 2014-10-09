@@ -8,7 +8,7 @@
 # All rights reserved
 #
 #
-# Last update: Apr 22, 2014 release 151
+# Last update: Sep 06, 2014 release 176
 
 
 
@@ -37,9 +37,14 @@ ifndef AVRDUDE_COM_OPTS
     AVRDUDE_COM_OPTS  = -q -V -F -p$(MCU) -C$(AVRDUDE_CONF)
 endif
 
-ifndef AVRDUDE_OPTS
+#ifndef AVRDUDE_OPTS
+ifeq ($(AVRDUDE_OPTS),)
 #    AVRDUDE_OPTS      = -c$(AVRDUDE_PROGRAMMER) -b$(AVRDUDE_BAUDRATE) -P$(AVRDUDE_PORT)
-    AVRDUDE_OPTS      = -c$(AVRDUDE_PROGRAMMER) -b$(AVRDUDE_BAUDRATE)
+    ifeq ($(AVRDUDE_BAUDRATE),)
+        AVRDUDE_OPTS      = -c$(AVRDUDE_PROGRAMMER)
+    else
+        AVRDUDE_OPTS      = -c$(AVRDUDE_PROGRAMMER) -b$(AVRDUDE_BAUDRATE)
+    endif
 endif
 
 ifndef AVRDUDE_MCU
@@ -58,7 +63,7 @@ endif
 
 # normal programming info
 #
-ifndef AVRDUDE_PROGRAMMER
+ifeq ($(AVRDUDE_PROGRAMMER),)
     AVRDUDE_PROGRAMMER = $(call PARSE_BOARD,$(BOARD_TAG),upload.protocol)
 endif
 

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:AutoGreen Arduino.xcodeproj">
+      location = "self:Autogreen Arduino.xcodeproj">
    </FileRef>
 </Workspace>
