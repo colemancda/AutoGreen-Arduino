@@ -91,7 +91,7 @@ Actuator fanRelay;
 Actuator valveRelay;
 
 dht dht;
-const int dhtPin = 1;
+const int dhtPin = 2;
 
 int temperature = InvalidValue;
 int humidity = InvalidValue;
